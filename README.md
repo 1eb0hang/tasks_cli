@@ -57,3 +57,7 @@ task-cli list in-progress
 - status - status of task 
 - createdAt - creation date and time of task 
 - updatedAt - last modification date and time of task
+
+
+**TODO**
+- [ ] add tests with jest framework

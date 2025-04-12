@@ -1,3 +1,6 @@
+import { getTasks, writeTasks} from "./file.js"
+import { nextId } from "./util.js"
+import { createTask } from "./task.js"
 
 const commands = {"add" : addTask,    // add new task 
 		  "update" : updateTask, // update task 
@@ -5,13 +8,17 @@ const commands = {"add" : addTask,    // add new task
 		  "mark" : markTask,   // mark task (todo, in-progress, done)
 		  "list" : listTasks}   // list tasks (all, done, todo, in-progress)o
 
-function addTask(command){
+async function addTask(command){
     /**
      * adds task and adds task record to json file db
      * @param command list containing task description 
      */
-    console.log("added task: " + command[0])
-    //console.log("Task successfully added (ID: {id})")
+    console.log(command);
+    let tasks = await getTasks();
+    let newId = await nextId(Object.keys(tasks));
+    tasks[String(newId)] = createTask(newId, command[0]);
+    console.log(tasks);
+    console.log(`Task successfully added (ID: ${newId})`)
 }
 
 function updateTask(command){
@@ -49,7 +56,7 @@ function listTasks(command){
 export default function handleCommand(args){
     let command = args[0].trim().toLowerCase();
     if(Object.keys(commands).includes(command)){
-	commands[command](["hello world"]);
+	commands[command](args.splice(1));
     }else{
 	console.log("Command not found: " + args[0]);
     }
