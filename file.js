@@ -1,9 +1,13 @@
 import { open } from 'node:fs/promises';
 
-let filehandle;
-try {
-    filehandle = await open('thefile.txt', 'w');
-    filehandle.write("hello world");
-} finally {
-  await filehandle?.close();
-} 
+
+async function getTasks(){
+    let filehandle = await open('./tasks/tasks.json', 'r');
+    let tasks = await filehandle.readFile({encoding:"utf8"})
+    console.log(tasks)
+    await filehandle?.close();
+    
+    return tasks;
+}
+
+getTasks();
