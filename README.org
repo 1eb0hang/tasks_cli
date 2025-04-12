@@ -1,9 +1,11 @@
-# Tasks_cli
+#+TITLE: README
+
+* Tasks_cli
 
 Project that tracks tasks\
 It is a cli tool
 
-## Requirements
+** Requirements
 
 - should ber commandline tool 
 - accept user action and input as command line arguments
@@ -29,7 +31,8 @@ user input
 
 **Example**
 
-```shell
+#+NAME: name
+#+BEGIN_SRC shell :exports none
 # Adding a new task
 task-cli add "Buy groceries"
 # Output: Task added successfully (ID: 1)
@@ -49,9 +52,10 @@ task-cli list
 task-cli list done
 task-cli list todo
 task-cli list in-progress
-```
+#+END_SRC
 
-### Task Properties
+
+*** Task Properties
 - id - unique identifier for task
 - descriptiton - short description of task 
 - status - status of task 
