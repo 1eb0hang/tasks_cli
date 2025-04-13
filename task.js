@@ -34,7 +34,7 @@ export function tasksDisplay(taskList, status = undefined){
 	    }
 	}
     }
-    return res.join("");
+    return res.length>0?res.join(""):`No ${status==undefined?"":status+" "}tasks found`;
 }
 
 
