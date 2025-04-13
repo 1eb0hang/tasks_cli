@@ -1,6 +1,6 @@
 import { getTasks, writeTasks} from "./file.js"
 import { nextId } from "./util.js"
-import { createTask, updateDate, markTaskAs } from "./task.js"
+import { createTask, updateDate, markTaskAs, tasksDisplay } from "./task.js"
 
 const commands = {"add" : addTask,    // add new task 
 		  "update" : updateTask, // update task 
@@ -61,11 +61,11 @@ async function markTask(command){
     // TODO : error handling for too many args or not enough
     // TODO : error handling for wrong status provided
     // TODO : handle mark cycling (todo -> in-progrss -> done -> todo)
-    let [status, id] = command;
+
+    let [status, id] = command; // status can be undefined
     let tasks = await getTasks();
-    console.log(tasks);
     tasks[String(id)] = markTaskAs(tasks[String(id)], status);
-    console.log(tasks);
+    await writeTasks(tasks);
     console.log(`Task marked as {marker} (ID: ${id})`);
 }
 
@@ -74,8 +74,12 @@ async function listTasks(command){
      * lists existing tasks; list can be filtered according to progress marker 
      * @param command list containg progress marker (optional)
      */
-    //TODO : error handling for too many args or not enough
-    console.log(`Tasks {status}listed`);
+    // TODO : error handling for too many args or not enough
+    let [status] = command; // can be undefined
+    let tasks = await getTasks();
+    let display = tasksDisplay(tasks, status);
+    console.log(display);
+    console.log(`Tasks ${status==undefined?"":status+" "}listed`);
 }
 
 export default function handleCommand(args){

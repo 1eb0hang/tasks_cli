@@ -21,6 +21,28 @@ export function markTaskAs(task, marker){
     return res;
 }
 
+export function tasksDisplay(taskList, status = undefined){
+    let res = [];
+    if(status == undefined){
+	for(let task in taskList){
+	    res.push(taskFormat(taskList[task]));
+	}
+    }else{
+    	for(let task in taskList){
+	    if(taskList[task].status == status){
+		res.push(taskFormat(taskList[task])); // should probaly use some kind of filter function
+	    }
+	}
+    }
+    return res.join("");
+}
+
+
+function taskFormat(task){
+    return `${task.id}) - ${task.description}\n\t${task.status} - ${task.createdAt} - ${task.updatedAt}\n--------------------------\n`;
+}
+
+
 //TODO: add createdAt var with some date time function
 
 // - id - unique identifier for task
