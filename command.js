@@ -1,6 +1,6 @@
 import { getTasks, writeTasks} from "./file.js"
 import { nextId } from "./util.js"
-import { createTask } from "./task.js"
+import { createTask, updateDate, markTaskAs } from "./task.js"
 
 const commands = {"add" : addTask,    // add new task 
 		  "update" : updateTask, // update task 
@@ -25,7 +25,7 @@ async function addTask(command){
 
 async function updateTask(command){
     /**
-     * updates existing task
+     * updates existing task by id
      * Should be something like `task update 1 "Buy groceries"`
      * @param command list containg  task id and new description
      */
@@ -33,34 +33,40 @@ async function updateTask(command){
     //TODO : error handling for non-existent task index
     let [id, description] = command;
     let tasks = await getTasks();
-    console.log(tasks[String(id)]);
     tasks[String(id)] = createTask(id, description);
-    tasks[String(id)].updatedAt = "...";
+    tasks[String(id)] = updateDate(tasks[String(id)]);
     await writeTasks(tasks);
     console.log(`Task updated (ID: ${id})`);
 }
 
 async function deleteTask(command){
     /**
-     * deletes existing task
+     * deletes existing task by id
      * @param command list containg task id
      */
     //TODO : error handling for too many args or not enough
+    //TODO : error handling for non-existent task index
     let [id] = command;
     let tasks = await getTasks();
-    console.log(tasks);
     delete tasks[String(id)];
-    console.log(tasks);
+    await writeTasks(tasks);
     console.log(`Task deleted (ID: ${id})`);
 }
 
 async function markTask(command){
     /**
-     * marks existing task as either todo, in-progress or done
+     * marks existing task by id as either todo, in-progress or done
      * @param command list containg  task id and new progress marker(optional)
      */
-    //TODO : error handling for too many args or not enough
-    console.log(`Task marked as {marker} (ID: ${newId})`);
+    // TODO : error handling for too many args or not enough
+    // TODO : error handling for wrong status provided
+    // TODO : handle mark cycling (todo -> in-progrss -> done -> todo)
+    let [status, id] = command;
+    let tasks = await getTasks();
+    console.log(tasks);
+    tasks[String(id)] = markTaskAs(tasks[String(id)], status);
+    console.log(tasks);
+    console.log(`Task marked as {marker} (ID: ${id})`);
 }
 
 async function listTasks(command){

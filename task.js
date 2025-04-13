@@ -9,6 +9,17 @@ export function createTask(id, description){
     }
 }
 
+export function updateDate(task){
+    let res = task;
+    res.updatedAt = "...";
+    return res;
+}
+
+export function markTaskAs(task, marker){
+    let res = task;
+    res.status = marker;
+    return res;
+}
 
 //TODO: add createdAt var with some date time function
 
