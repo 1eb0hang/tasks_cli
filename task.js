@@ -9,6 +9,9 @@ export function createTask(id, description){
     }
 }
 
+
+//TODO: add createdAt var with some date time function
+
 // - id - unique identifier for task
 // - descriptiton - short description of task 
 // - status - status of task 

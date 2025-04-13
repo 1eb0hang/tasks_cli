@@ -6,27 +6,38 @@ const commands = {"add" : addTask,    // add new task
 		  "update" : updateTask, // update task 
 		  "delete" : deleteTask, // delete task
 		  "mark" : markTask,   // mark task (todo, in-progress, done)
-		  "list" : listTasks}   // list tasks (all, done, todo, in-progress)o
+		  "list" : listTasks}   // list tasks (all, done, todo, in-progress)
 
 async function addTask(command){
     /**
      * adds task and adds task record to json file db
      * @param command list containing task description 
      */
-    console.log(command);
+    // console.log(command);
+    //TODO : error handling for too many args or not enough 
+    let [description] = command;
     let tasks = await getTasks();
     let newId = await nextId(Object.keys(tasks));
-    tasks[String(newId)] = createTask(newId, command[0]);
-    console.log(tasks);
-    console.log(`Task successfully added (ID: ${newId})`)
+    tasks[String(newId)] = createTask(newId, description);
+    await writeTasks(tasks);
+    console.log(`Task added (ID: ${newId})`);
 }
 
-function updateTask(command){
+async function updateTask(command){
     /**
      * updates existing task
+     * Should be something like `task update 1 "Buy groceries"`
      * @param command list containg  task id and new description
      */
-    console.log("updated task: " + command[0])
+    //TODO : error handling for too many args or not enough
+    //TODO : error handling for non-existent task index
+    let [id, description] = command;
+    let tasks = await getTasks();
+    console.log(tasks[String(id)]);
+    tasks[String(id)] = createTask(id, description);
+    tasks[String(id)].updatedAt = "new_value";
+    console.log(tasks[String(id)]);
+    console.log(`Task updated (ID: ${id})`);
 }
 
 function deleteTask(command){
@@ -34,7 +45,8 @@ function deleteTask(command){
      * deletes existing task
      * @param command list containg task id
      */
-    console.log("deleted task: " + command[0])
+    //TODO : error handling for too many args or not enough
+    console.log(`Task deleted (ID: ${newId})`);
 }
 
 function markTask(command){
@@ -42,7 +54,8 @@ function markTask(command){
      * marks existing task as either todo, in-progress or done
      * @param command list containg  task id and new progress marker(optional)
      */
-    console.log("marked task: " + command[0])
+    //TODO : error handling for too many args or not enough
+    console.log(`Task marked as {marker} (ID: ${newId})`);
 }
 
 function listTasks(command){
@@ -50,7 +63,8 @@ function listTasks(command){
      * lists existing tasks; list can be filtered according to progress marker 
      * @param command list containg progress marker (optional)
      */
-    console.log("listing tasks: " + command[0])
+    //TODO : error handling for too many args or not enough
+    console.log(`Tasks {status}listed`);
 }
 
 export default function handleCommand(args){
