@@ -35,21 +35,26 @@ async function updateTask(command){
     let tasks = await getTasks();
     console.log(tasks[String(id)]);
     tasks[String(id)] = createTask(id, description);
-    tasks[String(id)].updatedAt = "new_value";
-    console.log(tasks[String(id)]);
+    tasks[String(id)].updatedAt = "...";
+    await writeTasks(tasks);
     console.log(`Task updated (ID: ${id})`);
 }
 
-function deleteTask(command){
+async function deleteTask(command){
     /**
      * deletes existing task
      * @param command list containg task id
      */
     //TODO : error handling for too many args or not enough
-    console.log(`Task deleted (ID: ${newId})`);
+    let [id] = command;
+    let tasks = await getTasks();
+    console.log(tasks);
+    delete tasks[String(id)];
+    console.log(tasks);
+    console.log(`Task deleted (ID: ${id})`);
 }
 
-function markTask(command){
+async function markTask(command){
     /**
      * marks existing task as either todo, in-progress or done
      * @param command list containg  task id and new progress marker(optional)
@@ -58,7 +63,7 @@ function markTask(command){
     console.log(`Task marked as {marker} (ID: ${newId})`);
 }
 
-function listTasks(command){
+async function listTasks(command){
     /**
      * lists existing tasks; list can be filtered according to progress marker 
      * @param command list containg progress marker (optional)
