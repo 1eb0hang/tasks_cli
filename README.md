@@ -54,7 +54,10 @@ task-cli list in-progress
 ```
 
 **TODO**
-- [ ] add tests with jest framework
+- [ ] add tests
+- [ ] add shell script (linux & windows) to run applcation
+- [ ] finish validation
+- [ ] better output messages
 
 ### Project page URL
 
