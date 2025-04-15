@@ -4,20 +4,20 @@ export function createTask(id, description){
 	"id":id,
 	"description": description,
 	"status":"todo",
-	"createdAt": `${new Date(Date.now())}`,
-	"updatedAt":`${new Date(Date.now())}`
+	"createdAt": `${new Date(Date.now()).toISOString()}`,
+	"updatedAt":`${new Date(Date.now()).toISOString()}`
     }
 }
 
 export function updateDate(task){
     let res = task;
-    res.updatedAt = `${new Date(Date.now())}`;
+    res.updatedAt = `${new Date(Date.now()).toISOString()}`;
     return res;
 }
 
 export function markTaskAs(task, marker){
     let res = task;
-    res.status = marker;
+    res.status = marker.trim().toLowerCase();
     return res;
 }
 
@@ -37,16 +37,11 @@ export function tasksDisplay(taskList, status = undefined){
     return res.length>0?res.join(""):`No ${status==undefined?"":status+" "}tasks found`;
 }
 
-
 function taskFormat(task){
     return `${task.id}) - ${task.description}\n\t${task.status} - ${task.createdAt} - ${task.updatedAt}\n--------------------------\n`;
 }
 
+// function dateFormat(dateISO){
+    
+// }
 
-//TODO: add createdAt var with some date time function
-
-// - id - unique identifier for task
-// - descriptiton - short description of task 
-// - status - status of task 
-// - createdAt - creation date and time of task 
-// - updatedAt - last modification date and time of task

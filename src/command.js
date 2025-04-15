@@ -2,11 +2,11 @@ import { getTasks, writeTasks} from "./file.js"
 import { nextId } from "./util.js"
 import { createTask, updateDate, markTaskAs, tasksDisplay } from "./task.js"
 
-const commands = {"add" : addTask,    // add new task 
-		  "update" : updateTask, // update task 
-		  "delete" : deleteTask, // delete task
-		  "mark" : markTask,   // mark task (todo, in-progress, done)
-		  "list" : listTasks}   // list tasks (all, done, todo, in-progress)
+const commands = {"add" : addTask,       
+		  "update" : updateTask, 
+		  "delete" : deleteTask, 
+		  "mark" : markTask,     
+		  "list" : listTasks};
 
 async function addTask(command){
     /**
