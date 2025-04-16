@@ -15,9 +15,18 @@ export function updateDate(task){
     return res;
 }
 
-export function markTaskAs(task, marker){
+export function markTaskAs(task, status){
     let res = task;
-    res.status = marker.trim().toLowerCase();
+    if(status!=undefined){
+	res.status = status.trim().toLowerCase();
+    }else{
+	let cycle = ["todo", "in-progress", "done"];
+	let newStatus = cycle[cycle.indexOf(res.status)+1]
+	newStatus = newStatus == undefined?cycle[0]:newStatus;
+	res["status"]=newStatus;
+	//console.log(newStatus);
+    }
+    //console.log(res);
     return res;
 }
 

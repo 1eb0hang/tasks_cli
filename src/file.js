@@ -8,7 +8,6 @@ export async function getTasks(){
 	filehandle = await open('./tasks/tasks.json', 'r');
     }catch(err){
 	await initDir();
-	
 	return {};
     }
 
@@ -33,28 +32,7 @@ async function initDir(){
 	// directory exists
     }finally{
 	console.log("creating tasks file");
-	await writeTasks("{}");
+	await writeTasks(new Object());
     }
 }
 
-
-// let val = await getTasks();
-// writeTasks(
-// {
-//     "1": {
-// 	"id":1,
-// 	"description":"Eat lunch",
-// 	"status": "todo",
-// 	"createdAt": "...",
-// 	"updatedAt": "..."
-//     },
-
-//     "2":{
-// 	"id":2,
-// 	"description":"New task added",
-// 	"status":"done",
-// 	"createdAt":"...",
-// 	"updatedAt":"..."
-//     }
-// }
-// )

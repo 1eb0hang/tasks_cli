@@ -56,8 +56,9 @@ task-cli list in-progress
 **TODO**
 - [ ] add tests
 - [ ] add shell script (linux & windows) to run applcation
-- [ ] finish validation
+- [x] finish validation
 - [ ] better output messages
+- [ ] finish documentation
 
 ### Project page URL
 
