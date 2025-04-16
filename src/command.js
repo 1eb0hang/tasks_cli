@@ -3,11 +3,12 @@ import { nextId } from "./util.js";
 import { createTask, updateDate, markTaskAs, tasksDisplay } from "./task.js";
 import validCommand from "./validation.js";
 
-const commands = {"add" : addTask,       
+const commands = {"add"    : addTask,       
 		  "update" : updateTask, 
 		  "delete" : deleteTask, 
-		  "mark" : markTask,     
-		  "list" : listTasks};
+		  "mark"   : markTask,     
+		  "list"   : listTasks,
+		  "help"   : help};
 
 async function addTask(command){
     /**
@@ -16,7 +17,6 @@ async function addTask(command){
      */
     let [description] = command;
     let tasks = await getTasks();
-    console.log(typeof tasks);
     let newId = await nextId(Object.keys(tasks));
     tasks[String(newId)] = createTask(newId, description);
     await writeTasks(tasks);
@@ -62,7 +62,7 @@ async function markTask(command){
     let tasks = await getTasks();
     tasks[String(id)] = markTaskAs(tasks[String(id)], status);
     await writeTasks(tasks);
-    console.log(`Task marked as {marker} (ID: ${id})`);
+    console.log(`Task marked as ${tasks[String(id)].status} (ID: ${id})`);
 }
 
 async function listTasks(command){
@@ -77,6 +77,14 @@ async function listTasks(command){
     console.log(`Tasks ${status==undefined?"":status+" "}listed`);
 }
 
+async function help(command){
+    /**
+     * prints help message
+     * different message depending on its arguments
+     * @param command 
+     */
+}
+
 export default async function handleCommand(args){
     let command = args[0].trim().toLowerCase();
     let commandExists = await Object.keys(commands).includes(command)
@@ -85,11 +93,12 @@ export default async function handleCommand(args){
 	console.log("Command not found: " + command);
 	return;
     }
+
     let validation = await validCommand(args); //{isValid, message}
     if(!validation.isValid){
 	console.log(validation.message);
 	return;
     }
-    console.log("Command valid");
+    
     commands[command](args.slice(1))
 }

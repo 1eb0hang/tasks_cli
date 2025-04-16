@@ -5,7 +5,7 @@ import { open, mkdir } from 'node:fs/promises';
 export async function getTasks(){
     let filehandle;
     try{
-	filehandle = await open('./tasks/tasks.json', 'r');
+	filehandle = await open('./tasksDir/tasks.json', 'r');
     }catch(err){
 	await initDir();
 	return {};
@@ -18,7 +18,7 @@ export async function getTasks(){
 }
 
 export async function writeTasks(tasks){
-    let filehandle = await open('./tasks/tasks.json', 'w');
+    let filehandle = await open('./tasksDir/tasks.json', 'w');
     let res = JSON.stringify(tasks);
     await filehandle.write(res);
     await filehandle?.close();
@@ -27,12 +27,16 @@ export async function writeTasks(tasks){
 
 async function initDir(){
     try{
-	await mkdir("./tasks");
+	await mkdir("./tasksDir");
     }catch(err){
 	// directory exists
     }finally{
 	console.log("creating tasks file");
 	await writeTasks(new Object());
     }
+}
+
+export async function help(command){
+    return "";
 }
 

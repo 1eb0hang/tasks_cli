@@ -24,9 +24,7 @@ export function markTaskAs(task, status){
 	let newStatus = cycle[cycle.indexOf(res.status)+1]
 	newStatus = newStatus == undefined?cycle[0]:newStatus;
 	res["status"]=newStatus;
-	//console.log(newStatus);
     }
-    //console.log(res);
     return res;
 }
 

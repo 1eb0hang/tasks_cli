@@ -1,30 +1,15 @@
 # Tasks_cli
 
-Project that tracks tasks\
+Tool that tracks tasks, and allows you to mark them as "todo", "in-progress' or "done"\
 It is a cli tool
 
 ## Requirements
+- nodejs v23
 
-- should ber commandline tool 
-- accept user action and input as command line arguments
-- users actions:
-	- add, update and delete tasks
-	- mark tasks as in progress or done
-	- list all tasks 
-		- list all done tasks 
-		- list all not done tasks
-		- list all in progress tasks 
+**WARNING** : This application has only been tested on windows and linux through MSYS2
 
-**Constraints**
-- use any proraming language
-- Use positional arguments in commandline to accept \
-user input
-- use a json file to store the tasks in the current directory
-	- json should be created is not exist
-	- use native file system module in chosen programming language
+## Installation
 
-- ensure to handle errors and edge case gracfully
-- **do not use any external libraries or frameworks**
 
 
 **Example**
@@ -57,8 +42,8 @@ task-cli list in-progress
 - [ ] add tests
 - [ ] add shell script (linux & windows) to run applcation
 - [x] finish validation
-- [ ] better output messages
 - [ ] finish documentation
+- [ ] refactor
 
 ### Project page URL
 
