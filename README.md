@@ -1,5 +1,6 @@
 # Tasks_cli
-![./docs/showcase.mp4]
+[![Watch the video](https://raw.githubusercontent.com/1eb0hang/tasks_cli/main/docs/thumbnail.png)](https://raw.githubusercontent.com/1eb0hang/tasks_cli/main/docs/showcase.mp4)
+
 Tool that tracks tasks, and allows you to mark them as "todo", "in-progress' or "done"\
 It is a cli tool
 
