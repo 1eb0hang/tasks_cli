@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
-	"clean": "rm -rf tasks/",
+	"clean": "rm -rf tasksDir/",
 	"test": "node tests/test.js",
 	"dev": "node src/index.js"
 	
