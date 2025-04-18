@@ -15,17 +15,17 @@ const helpAdd =
       "tasks add [description]\n"+
       "\n"+
       "Adds new task and assigns id to task that is\n"+
-      "referencable later\n";
+      "referencable later";
 
 const helpUpdate = 
       "tasks update [id] [description]\n"+
       "\n"+
-      "Updates task description by id\n";
+      "Updates task description by id";
 
 const helpDelete = 
       "tasks delete [id]\n"+
       "\n"+
-      "Deletes task specified by id\n";
+      "Deletes task specified by id";
 
 const helpMark = 
       "tasks mark [id]\n"+
@@ -34,13 +34,13 @@ const helpMark =
       "Updates task status specified by id\n"+
       "Marking tasks without specifying new status\n"+
       "cycles status:\n"+
-      "    todo => in-progress=>done=>todo\n";
+      "    todo => in-progress=>done=>todo";
 
 const helpList = 
       "tasks list\n"+
       "tasks list [status]\n"+
       "\n"+
-      "Lists all tasks or lists tasks by status\n";
+      "Lists all tasks or lists tasks by status";
 
 const helpMessage = {
     undefined : help,

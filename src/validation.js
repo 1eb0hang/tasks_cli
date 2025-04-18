@@ -1,5 +1,5 @@
 import {getTasks} from "./file.js";
-import help from "./help.js";
+import getHelp from "./help.js";
 
 let statusOptions = [undefined, "todo", "in-progress","done"];
 let ids = [];
@@ -53,6 +53,7 @@ function validOption(_command){
 }
 
 export default async function validCommand(args){
+    // validates arguments passed to command
     ids = Object.keys(await getTasks());
     let command = args[0].trim().toLowerCase();
     let validType, validCount;
@@ -64,7 +65,7 @@ export default async function validCommand(args){
 	validCount = validation[command].count(args.slice(1))
 	message += !validCount ?"Error: Argument count invalid\n":"";
 
-	message += message!=""?"{HELP MESSAGE}\nAborting":"";
+	message += message!=""?`\n${getHelp([undefined])}\nAborting`:"";
 	
     }catch(err){
 	message = "Something went wrong while validating command: \n"+err.toString();
