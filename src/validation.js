@@ -1,4 +1,5 @@
 import {getTasks} from "./file.js";
+import help from "./help.js";
 
 let statusOptions = [undefined, "todo", "in-progress","done"];
 let ids = [];
@@ -28,13 +29,22 @@ let validation = { // validates commands and their arguments
 			  command.length <=2;}
     },
     "help":{
-	"type":()=>true, // temp values
-	"count":()=>true // temp values
+	"type":validHelp,
+	"count":(command)=>{return command.length >= 0 &&
+			    command.length <= 1;} // temp values
     }
 };
 
+function validHelp(_command){
+    // this function is specifically for "help" validation
+    let validCommands =  Object.keys(validation);
+    validCommands[validCommands.indexOf("help")] = undefined;
+    // console.log(validCommands);
+    return validCommands.includes(_command[0]);
+}
+
 function validOption(_command){
-    // this function is spacifically for "mark" validation
+    // this function is specifically for "mark" validation
     let [status, id] = _command;
     id = id == undefined?status:id;
     status = id == status?undefined:status;
@@ -44,7 +54,7 @@ function validOption(_command){
 
 export default async function validCommand(args){
     ids = Object.keys(await getTasks());
-    let command = args[0];
+    let command = args[0].trim().toLowerCase();
     let validType, validCount;
     let message = "";
     try{
@@ -53,7 +63,7 @@ export default async function validCommand(args){
 	
 	validCount = validation[command].count(args.slice(1))
 	message += !validCount ?"Error: Argument count invalid\n":"";
-	
+
 	message += message!=""?"{HELP MESSAGE}\nAborting":"";
 	
     }catch(err){

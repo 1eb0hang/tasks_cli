@@ -1,6 +1,7 @@
 import { getTasks, writeTasks} from "./file.js";
 import { nextId } from "./util.js";
 import { createTask, updateDate, markTaskAs, tasksDisplay } from "./task.js";
+import getHelp from "./help.js"
 import validCommand from "./validation.js";
 
 const commands = {"add"    : addTask,       
@@ -83,6 +84,7 @@ async function help(command){
      * different message depending on its arguments
      * @param command 
      */
+    console.log(getHelp(command));
 }
 
 export default async function handleCommand(args){

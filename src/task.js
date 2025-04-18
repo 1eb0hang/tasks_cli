@@ -1,5 +1,6 @@
 
 export function createTask(id, description){
+    //creates new task
     return {
 	"id":id,
 	"description": description,
@@ -10,12 +11,15 @@ export function createTask(id, description){
 }
 
 export function updateDate(task){
+    // updates task description and timestamp
     let res = task;
     res.updatedAt = `${new Date(Date.now()).toISOString()}`;
     return res;
 }
 
 export function markTaskAs(task, status){
+    // marks as status specified, or cycle to  next status
+    // todo => in-progress => done => todo
     let res = task;
     if(status!=undefined){
 	res.status = status.trim().toLowerCase();
@@ -29,6 +33,7 @@ export function markTaskAs(task, status){
 }
 
 export function tasksDisplay(taskList, status = undefined){
+    // lists tasks or informs that no tasks exist
     let res = [];
     if(status == undefined){
 	for(let task in taskList){

@@ -12,7 +12,7 @@ Solution to the [task-tracker](https://roadmap.sh/projects/task-tracker) from [r
 - nodejs v23
   (Make sure that it is included in Path variable)
   
-**WARNING** : This application has only been tested on windows and linux through MSYS2
+**WARNING** : This application has only been tested on Windows through MSYS2
 
 ### Installation
 
